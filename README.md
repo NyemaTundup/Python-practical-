@@ -1,2 +1,540 @@
 # Python-practical-
 Python practical 
+
+## Student Information
+
+| Details | Information |
+|---|---|
+| Name | Nyema Tundup |
+| Roll No. | 26570042 |
+| Course | B.Sc. (Hons.) Computer Science |
+| Semester | Semester 1 |
+| College | Ramanujan College |
+| University | University of Delhi |
+
+---
+# Index
+| S.No | Practical | 
+| :--- | :--- |
+| 1 | [The roots of a quadratic equation.](#Practucal-1) |
+| 2 | [Prime Numbers <br /> a-Check Prime numbers  <br /> b-Print All Prime numbers till 'n' <br /> c-First 'n' Prime numbers](#Practical-2) |
+| 3 | [Create a pyramid of '*' and a reverse pyramid.](#Practical-3) |
+| 4 | [Check Character](#Practical-4) |
+| 5 | [String Operations-I](#Practical-5) |
+| 6 | [String Operations-II](#Practical-6) |
+| 7 | [String Operations-III](#Practical-7) |
+| 8 | [Lists <br /> a. 'for' loop <br /> b. list comprehension](#Practical-8) |
+| 9 | [File Handling](#Practical-9) |
+| 10 | [Dictionary](#Practical-10) |
+| 11 | [Tuple](#Practical-11) |
+| 12 | [Employee Class](#Practical-12) |
+| 13 | [Class 2DPoint](#Practical-13) |
+| 14 | [Class 3DPoint(Inheritance)](#Practical-14) |
+| 15 | [Exception Handling](#Practical-15) |
+
+---
+# Practical-1
+#### Write a program to find the roots of a quadratic equation
+
+```Python
+
+import math
+
+print("----- Q1 -----")
+a = float(input("Enter a: "))
+b = float(input("Enter b: "))
+c = float(input("Enter c: "))
+
+if a == 0:
+    print("Not a quadratic equation")
+else:
+    d = b * b - 4 * a * c
+    if d > 0:
+        r1 = (-b + math.sqrt(d)) / (2 * a)
+        r2 = (-b - math.sqrt(d)) / (2 * a)
+        print("Real and different roots:", r1, r2)
+    elif d == 0:
+        r = -b / (2 * a)
+        print("Real and equal roots:", r, r)
+    else:
+        real = -b / (2 * a)
+        imag = math.sqrt(-d) / (2 * a)
+        print("Complex roots:", real, "+", imag, "i and", real, "-", imag, "i")
+
+
+```
+Trial Run <br /> Inputs: a=1, b=5, c=6
+
+Output:
+<img width="657" height="240" alt="Image" src="https://github.com/user-attachments/assets/43913bb4-c5bd-46a9-aed3-7a0f24411993" />
+
+---
+# Practical-2
+#### Write a program to accept a number 'n' and <br/> a. Check if 'n' is prime <br /> b. Generate all prime numbers till 'n' <br /> c. Generate first 'n' prime numbers <br /> This program may be done using functions.
+
+```Python
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def primes_till_n(n):
+    result = []
+    for i in range(2, n + 1):
+        if is_prime(i):
+            result.append(i)
+    return result
+
+def first_n_primes(n):
+    result = []
+    num = 2
+    while len(result) < n:
+        if is_prime(num):
+            result.append(num)
+        num += 1
+    return result
+
+n = int(input("Enter n: "))
+if is_prime(n):
+    print(n, "is prime")
+else:
+    print(n, "is not prime")
+print("Primes till", n, ":", primes_till_n(n))
+print("First", n, "primes:", first_n_primes(n))
+
+```
+
+Trial Run <br /> Inputs: a=5
+
+Output:
+<img width="1007" height="350" alt="Image" src="https://github.com/user-attachments/assets/6c8df528-622c-4385-8be6-d16cf2d28560" />
+
+---
+# Practical-3
+#### Write a program to create a pyramid of the character '*' and a reverse pyramid
+
+```Python
+
+rows = int(input("Enter number of rows: "))
+
+print("Pyramid:")
+for i in range(1, rows + 1):
+    print(" " * (rows - i) + "* " * i)
+
+print("Reverse pyramid:")
+for i in range(rows, 0, -1):
+    print(" " * (rows - i) + "* " * i)
+
+```
+
+Trial Run <br /> Input: a=6
+
+Output:
+<img width="1080" height="842" alt="Image" src="https://github.com/user-attachments/assets/fdff5d90-a6a6-4a42-be25-4e0a71760fba" />
+
+---
+# Practical-4
+#### Write a program that accepts a character and performs the following: <br /> a. print whether the character is a letter or numeric digit or a special character. <br /> b. if the character is a letter, print whether the letter is uppercase or lowercase <br /> c. if the character is a numeric digit, prints its name in text.
+
+```Python
+
+ch = input("Enter a single character: ")[0]
+names = ["ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
+
+if ch.isalpha():
+    print(ch, "is a letter")
+    if ch.isupper():
+        print("It is uppercase")
+    else:
+        print("It is lowercase")
+elif ch.isdigit():
+    print(ch, "is a numeric digit")
+    print("Name:", names[int(ch)])
+else:
+    print(ch, "is a special character")
+
+```
+
+Trial Run <br /> Inputs: A, 7 
+
+Output:
+| <img width="982" height="303" alt="Image" src="https://github.com/user-attachments/assets/eceb4b4c-7d8a-428d-beeb-50b72292a7ae" /> | <img width="950" height="297" alt="Image" src="https://github.com/user-attachments/assets/7cee53a0-0fdf-4fac-be92-0cb01d4250ec" /> |
+|:---:|:---:|
+
+---
+# Practical-5
+#### Write a program to perform the following operations on a string <br /> a. Find the frequency of a character in a string. <br /> b. Replace a character by another character in a string. <br /> c. Remove the first occurrence of a character from a string. <br /> d. Remove all occurrences of a character from a string.
+
+```Python
+
+s = input("Enter a string: ")
+x = input("Enter a character: ")
+
+# a. frequency
+count = 0
+for i in s:
+    if i == x:
+        count += 1
+print("Frequency of", x, "=", count)
+
+# b. replace a character by another
+y = input("Enter the character to replace with: ")
+new_s = ""
+for i in s:
+    if i == x:
+        new_s += y
+    else:
+        new_s += i
+print("After replacing:", new_s)
+
+# c. remove first occurrence
+new_s = ""
+removed = False
+for i in s:
+    if i == x and not removed:
+        removed = True
+    else:
+        new_s += i
+print("After removing first occurrence:", new_s)
+
+# d. remove all occurrences
+new_s = ""
+for i in s:
+    if i != x:
+        new_s += i
+print("After removing all occurrences:", new_s)
+
+```
+
+Trial Run <br /> Inputs:
+
+Output:
+<img width="1080" height="494" alt="Image" src="https://github.com/user-attachments/assets/f072d883-78a6-462d-8dfa-93629f05457e" />
+
+---
+# Practical-6
+#### Write a program to swap the first n characters of two strings.
+
+```Python
+
+s1 = input("Enter first string: ")
+s2 = input("Enter second string: ")
+n = int(input("Enter n: "))
+
+new1 = s2[:n] + s1[n:]
+new2 = s1[:n] + s2[n:]
+print("After swapping:", new1, new2)
+
+```
+
+Trial Run <br /> Inputs: 
+First String: Khel khatam beta
+Second string: Baby doll masone di
+
+Output:
+<img width="948" height="240" alt="Image" src="https://github.com/user-attachments/assets/0b3ae4f3-10ee-458e-980c-92740fd615b9" />
+
+---
+# Practical-7
+#### Write a function that accepts two strings and returns the indices of all the occurrences of the second string in the first string as a list. If the second string is not present in the first string then it should return -1.
+
+``` Python
+
+def find_indices(s1, s2):
+    result = []
+    for i in range(len(s1) - len(s2) + 1):
+        if s1[i:i + len(s2)] == s2:
+            result.append(i)
+    if len(result) == 0:
+        return -1
+    return result
+
+print(find_indices("abababc", "ab"))   # [0, 2, 4]
+print(find_indices("hello", "xyz"))    # -1
+
+
+```
+
+Trial Run <br /> Inputs: <br /> s1=abababc, s2=ab <br /> s1=hello, s2=xyz
+
+Output: <br /> [0, 2, 4] <br /> -1 <br />
+<img width="744" height="240" alt="Image" src="https://github.com/user-attachments/assets/4d7d6d09-b4a8-4b43-b814-069f0c66dc0b" />
+
+---
+# Practical-8
+#### Write a program to create a list of the cubes of only the even integers appearing in the input list (may have elements of other types also) using the following: <br /> a. 'for' loop <br /> b. list comprehension
+
+```Python
+
+lst = [1, 2, "hello", 4, 3.5, 6, "8", 7, 10, True]
+
+# a. using for loop
+cubes = []
+for i in lst:
+    if type(i) == int and i % 2 == 0:
+        cubes.append(i ** 3)
+print("Using for loop:", cubes)
+
+# b. using list comprehension
+cubes = [i ** 3 for i in lst if type(i) == int and i % 2 == 0]
+print("Using list comprehension:", cubes)
+
+```
+Trial Run <br /> Inputs: <br /> lst = [1, 2, "hello", 4, 3.5, 6, "8", 7, 10, True]
+
+Output:
+<img width="920" height="240" alt="Image" src="https://github.com/user-attachments/assets/45dfbce6-a6a0-4016-b830-d936d26ed741" />
+
+---
+# Practical-9
+#### Write a program to read a file and <br /> a. Print the total number of characters, words and lines in the file. <br /> b. Calculate the frequency of each character in the file. Use a variable of dictionary type to maintain the count. <br /> c. Print the words in reverse order. <br /> d. Copy even lines of the file to a file named 'Filel' and odd lines to another file named 'File2'.
+
+```Python
+
+filename = input("Enter file name: ")
+
+# a. characters, words, lines
+f = open(filename, "r")
+text = f.read()
+f.close()
+lines = text.split("\n")
+if lines[-1] == "":
+    lines.pop()
+print("Characters:", len(text))
+print("Words:", len(text.split()))
+print("Lines:", len(lines))
+
+# b. frequency of each character using dictionary
+freq = {}
+for ch in text:
+    if ch in freq:
+        freq[ch] += 1
+    else:
+        freq[ch] = 1
+print("Frequency:", freq)
+
+# c. words in reverse order
+words = text.split()
+words.reverse()
+print("Words in reverse:", words)
+
+# d. even lines -> File1, odd lines -> File2
+f1 = open("File1.txt", "w")
+f2 = open("File2.txt", "w")
+for i in range(len(lines)):
+    line_no = i + 1
+    if line_no % 2 == 0:
+        f1.write(lines[i] + "\n")
+    else:
+        f2.write(lines[i] + "\n")
+f1.close()
+f2.close()
+print("Even lines copied to File1.txt, odd lines to File2.txt")
+
+```
+
+---
+# Practical-10
+#### Write a function that prints a dictionary where the keys are numbers between 1 and 5 and the values are cubes of the keys. 
+
+```Python
+
+def print_cubes():
+    d = {}
+    for i in range(1, 6):
+        d[i] = i ** 3
+    print(d)
+
+print_cubes()
+
+```
+Trial Run 
+
+Output: <br />
+<img width="922" height="296" alt="Image" src="https://github.com/user-attachments/assets/f3881bd3-fa7f-4bc8-b8d8-5546f12e9445" />
+
+---
+# Practical-11
+#### Consider a tuple t1=(1, 2, 5, 7, 9, 2, 4, 6, 8, 10). Write a program to perform following operations: <br /> a. Print half the values of the tuple in one line and the other half in the next line. <br /> b. Print another tuple whose values are even numbers in the given tuple. <br /> c. Concatenate a tuple t2=(11,13,15) with t1. <br /> d. Return maximum and minimum value from this tuple.
+
+```Python
+
+t1 = (1, 2, 5, 7, 9, 2, 4, 6, 8, 10)
+
+# a. half in one line, other half in next
+mid = len(t1) // 2
+print(t1[:mid])
+print(t1[mid:])
+
+# b. tuple of even numbers
+even = ()
+for i in t1:
+    if i % 2 == 0:
+        even += (i,)
+print("Even tuple:", even)
+
+# c. concatenate with t2
+t2 = (11, 13, 15)
+t3 = t1 + t2
+print("Concatenated:", t3)
+
+# d. max and min
+print("Maximum:", max(t3))
+print("Minimum:", min(t3))
+
+```
+Trial Run <br /> Input: t1=(1, 2, 5, 7, 9, 2, 4, 6, 8, 10) 
+
+Output: <br /> <img width="1016" height="326" alt="Image" src="https://github.com/user-attachments/assets/c00f4d24-118d-493d-b89f-101ab625f0ec" />
+
+---
+# Practical-12
+#### Define a class Employee that stores information about employees in the company. The class should contain the following: <br /> (i) data members- count (to keep a record of all the objects being created for this class) and for every employee: an employee number, Name, Dept, Basic, DA and HRA. <br /> (ii) function members: <br /> a._init_method to initialize and/or update the members. Add statements to ensure that the program is terminated if any of Basic, DA and HRA is set to a negative value. <br /> b. function salary, that returns salary as the sum of Basic, DA and HRA. <br /> _del_function to decrease the number of objects created for the class. <br /> d. str function to display the details of an employee along with the salary of an employee in a proper format.
+
+```Python
+
+import sys
+
+class Employee:
+    count = 0
+
+    def __init__(self, empno, name, dept, basic, da, hra):
+        if basic < 0 or da < 0 or hra < 0:
+            print("Basic, DA and HRA cannot be negative. Program terminated.")
+            sys.exit()
+        self.empno = empno
+        self.name = name
+        self.dept = dept
+        self.basic = basic
+        self.da = da
+        self.hra = hra
+        Employee.count += 1
+
+    def salary(self):
+        return self.basic + self.da + self.hra
+
+    def __del__(self):
+        Employee.count -= 1
+
+    def __str__(self):
+        return ("Employee No: " + str(self.empno) +
+                "\nName: " + self.name +
+                "\nDept: " + self.dept +
+                "\nBasic: " + str(self.basic) +
+                "\nDA: " + str(self.da) +
+                "\nHRA: " + str(self.hra) +
+                "\nSalary: " + str(self.salary()))
+
+e1 = Employee(101, "Amit", "Sales", 30000, 5000, 8000)
+e2 = Employee(102, "Neha", "HR", 35000, 6000, 9000)
+print(e1)
+print()
+print(e2)
+print("Number of employees:", Employee.count)
+del e2
+print("After deleting one, number of employees:", Employee.count)
+
+```
+Trial Run <br /> 
+
+Output: <br />
+<img width="1023" height="678" alt="Image" src="https://github.com/user-attachments/assets/ab504d3f-f8d9-439d-b01a-c13ef132ad05" />
+
+---
+# Python-13
+#### Write a program to define a class "2DPoint" with coordinates x and y as attributes. Create relevant methods and print the objects. Also define a method distance to calculate the distance between any two point objects.
+
+```Python
+
+import math
+
+print("\n----- Q13 -----")
+
+class Point2D:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return "(" + str(self.x) + ", " + str(self.y) + ")"
+
+    def distance(self, other):
+        return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+p1 = Point2D(1, 2)
+p2 = Point2D(4, 6)
+print("Point 1:", p1)
+print("Point 2:", p2)
+print("Distance:", p1.distance(p2))
+
+```
+Trial Run <br /> 
+
+Output: <br />
+<img width="780" height="240" alt="Image" src="https://github.com/user-attachments/assets/3043e0e5-c2b0-4bda-9342-c01d3f7fb158" />
+
+---
+# Practical-14
+#### Inherit the above class to create a "3Dpoint" with additional attribute z. Override the method defined in "2DPoint" class, to calculate distance between two points of the "3DPoint" class.
+
+```Python
+
+import math
+
+
+class Point3D(Point2D):
+    def __init__(self, x=0, y=0, z=0):
+        super().__init__(x, y)
+        self.z = z
+
+    def __str__(self):
+        return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
+
+    def distance(self, other):
+        return math.sqrt((self.x - other.x) ** 2 +
+                         (self.y - other.y) ** 2 +
+                         (self.z - other.z) ** 2)
+
+q1 = Point3D(1, 2, 3)
+q2 = Point3D(4, 6, 8)
+print("Point 1:", q1)
+print("Point 2:", q2)
+print("Distance:", q1.distance(q2))
+
+```
+Trial Run <br />
+
+Output: <br />
+<img width="888" height="244" alt="Image" src="https://github.com/user-attachments/assets/5a0e277e-8dfd-4e9a-868c-dc14ec11ac50" />
+
+---
+# Practical-15
+#### Write a program to accept a name from a user. Raise and handle appropriate exception(s) if the text entered by the user contains digits and/or special characters.
+
+```Python
+
+class InvalidNameError(Exception):
+    pass
+
+try:
+    name = input("Enter your name: ")
+    for ch in name:
+        if ch.isdigit():
+            raise InvalidNameError("Name should not contain digits")
+        if not ch.isalpha() and ch != " ":
+            raise InvalidNameError("Name should not contain special characters")
+    print("Hello", name)
+except InvalidNameError as e:
+    print("Error:", e)
+
+```
+
+Trial Run <br />
+
+Output: <br />
+| <img width="787" height="240" alt="Image" src="https://github.com/user-attachments/assets/075d48e6-9c9f-47fc-94b6-079d04ddf0f5" /> | <img width="888" height="240" alt="Image" src="https://github.com/user-attachments/assets/6dd0536c-81e4-4c4f-b791-8b4e59557e4f" /> |
+|:---:|:---:|
